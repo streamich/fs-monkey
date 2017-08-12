@@ -1,4 +1,6 @@
-# `fs` Monkey
+# `fs-monkey`
+
+[![][npm-img]][npm-url]
 
 Monkey-patches for file system related things.
 
@@ -18,20 +20,34 @@ let vol = {
 
 **API**
 
- - [`patchFs(vol[, fs])`](#patchfsvol-fs) - rewrites Node's file system module `fs` with *fs-like* object
- - [`patchRequire(vol[, Module])`](#patchrequirevol-module) - patches Node's `module` module to use a give *fs-like* for module loading
+ - [`patchFs(vol[, fs])`](#patchfsvol-fs) - rewrites Node's file system module `fs` with *fs-like* object `vol`
+ - [`patchRequire(vol[, Module])`](#patchrequirevol-module) - patches Node's `module` module to use a give *fs-like* object `vol` for module loading
 
 
 ## `patchFs(vol[, fs])`
 
-rewrites Node's file system module `fs` with *fs-like* object.
+Rewrites Node's file system module `fs` with *fs-like* object.
 
  - `vol` - fs-like object
- - `fs` - a file system to patch, defaults to `require('fs')`
+ - `fs` (optional) - a file system to patch, defaults to `require('fs')`
 
 ```js
-import {vol} from '../../../memfs/lib';
-import {patchFs} from '../index';
+import {patchFs} from 'fs-monkey';
+
+const myfs = {
+    readFileSync: () => 'hello world',
+};
+
+patchFs(myfs);
+console.log(require('fs').readFileSync('/foo/bar')); // hello world
+```
+
+You don't need to create *fs-like* objects yourself, use [`memfs`](https://github.com/streamich/memfs)
+to create a virtual file system for you:
+
+```js
+import {vol} from 'memfs';
+import {patchFs} from 'fs-monkey';
 
 vol.fromJSON({'/dir/foo': 'bar'});
 patchFs(vol);
@@ -41,12 +57,12 @@ console.log(require('fs').readdirSync('/')); // [ 'dir' ]
 
 ## `patchRequire(vol[, Module])`
 
-patches Node's `module` module to use a give *fs-like* for module loading.
+Patches Node's `module` module to use a give *fs-like* object `vol` for module loading.
 
  - `vol` - fs-like object
- - `Module` - a module to patch, defaults to `require('module')`
+ - `Module` (optional) - a module to patch, defaults to `require('module')`
 
-Monkey-patches the `require` function of Node.js, this way you can make
+Monkey-patches the `require` function in Node, this way you can make
 Node.js to *require* modules from your custom file system.
 
 It expects an object with three file system methods implemented that are
@@ -74,7 +90,7 @@ require('/foo/bar'); // obi trice
 ```
 
 Now the `require` function will only load the files from the `vol` file
-system, but not from the actual file system.
+system, but not from the actual file system on the disk.
 
 If you want the `require` function to load modules from both file
 systems, use the [`unionfs`](https://github.com/streamich/unionfs) package
@@ -93,6 +109,9 @@ ufs
 patchRequire(ufs);
 require('/foo/bar.js'); // obi trice
 ```
+
+[npm-img]: https://img.shields.io/npm/v/fs-monkey.svg
+[npm-url]: https://www.npmjs.com/package/fs-monkey
 
 
 # License
