@@ -2,27 +2,32 @@
 
 Monkey-patches for file system related things.
 
-> **Terms**
->
-> An *fs-like* object is an object that implements methods that correspond
-> to [File System API of Node.js](https://nodejs.org/api/fs.html#fs_buffer_api), like:
->
-> ```js
-> let vol = {
->     readFileSync: () => { /* ... */ },
->     // etc...
-> }
-> ```
->
-> It is denoted below as the `vol` parameter.
+**Terms**
+
+An *fs-like* object is an object that implements methods that correspond
+to [File System API of Node.js](https://nodejs.org/api/fs.html#fs_buffer_api).
+It is denoted below as the `vol` parameter.
+
+```js
+let vol = {
+    readFileSync: () => { /* ... */ },
+    // etc...
+}
+```
+
+
+**API**
+
+ - [`patchFs(vol[, fs])`](#patchfsvol-fs) - rewrites Node's file system module `fs` with *fs-like* object
+ - [`patchRequire(vol[, Module])`](#patchrequirevol-module) - patches Node's `module` module to use a give *fs-like* for module loading
 
 
 ## `patchFs(vol[, fs])`
 
-Patches Node's file system module `fs.js`.
+rewrites Node's file system module `fs` with *fs-like* object.
 
- - `vol` -- fs-like object
- - `fs` -- a file system to patch, defaults to `require('fs')`
+ - `vol` - fs-like object
+ - `fs` - a file system to patch, defaults to `require('fs')`
 
 ```js
 import {vol} from '../../../memfs/lib';
@@ -36,10 +41,10 @@ console.log(require('fs').readdirSync('/')); // [ 'dir' ]
 
 ## `patchRequire(vol[, Module])`
 
-Patches Node's `require` function.
+patches Node's `module` module to use a give *fs-like* for module loading.
 
- - `vol` -- fs-like object
- - `Module` -- a module to patch, defaults to `require('module')`
+ - `vol` - fs-like object
+ - `Module` - a module to patch, defaults to `require('module')`
 
 Monkey-patches the `require` function of Node.js, this way you can make
 Node.js to *require* modules from your custom file system.
