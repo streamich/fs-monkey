@@ -1,14 +1,14 @@
 # `fs-monkey`
 
-[![][npm-img]][npm-url]
+Monkey-patches for filesystem related things.
 
-Monkey-patches for file system related things.
+[![][npm-img]][npm-url]
 
 **Terms**
 
-An *fs-like* object is an object that implements methods that correspond
-to [File System API of Node.js](https://nodejs.org/api/fs.html#fs_buffer_api).
-It is denoted below as the `vol` parameter.
+An *fs-like* object is an object that implements methods of Node's
+[filesystem API](https://nodejs.org/api/fs.html#fs_buffer_api).
+It is denoted as `vol`:
 
 ```js
 let vol = {
@@ -20,16 +20,16 @@ let vol = {
 
 **API**
 
- - [`patchFs(vol[, fs])`](#patchfsvol-fs) - rewrites Node's file system module `fs` with *fs-like* object `vol`
+ - [`patchFs(vol[, fs])`](#patchfsvol-fs) - rewrites Node's filesystem module `fs` with *fs-like* object `vol`
  - [`patchRequire(vol[, Module])`](#patchrequirevol-module) - patches Node's `module` module to use a give *fs-like* object `vol` for module loading
 
 
 ## `patchFs(vol[, fs])`
 
-Rewrites Node's file system module `fs` with *fs-like* object.
+Rewrites Node's filesystem module `fs` with *fs-like* object.
 
  - `vol` - fs-like object
- - `fs` (optional) - a file system to patch, defaults to `require('fs')`
+ - `fs` (optional) - a filesystem to patch, defaults to `require('fs')`
 
 ```js
 import {patchFs} from 'fs-monkey';
@@ -43,7 +43,7 @@ console.log(require('fs').readFileSync('/foo/bar')); // hello world
 ```
 
 You don't need to create *fs-like* objects yourself, use [`memfs`](https://github.com/streamich/memfs)
-to create a virtual file system for you:
+to create a virtual filesystem for you:
 
 ```js
 import {vol} from 'memfs';
@@ -63,9 +63,9 @@ Patches Node's `module` module to use a give *fs-like* object `vol` for module l
  - `Module` (optional) - a module to patch, defaults to `require('module')`
 
 Monkey-patches the `require` function in Node, this way you can make
-Node.js to *require* modules from your custom file system.
+Node.js to *require* modules from your custom filesystem.
 
-It expects an object with three file system methods implemented that are
+It expects an object with three filesystem methods implemented that are
 needed for the `require` function to work.
 
 ```js
@@ -90,11 +90,11 @@ require('/foo/bar'); // obi trice
 ```
 
 Now the `require` function will only load the files from the `vol` file
-system, but not from the actual file system on the disk.
+system, but not from the actual filesystem on the disk.
 
 If you want the `require` function to load modules from both file
 systems, use the [`unionfs`](https://github.com/streamich/unionfs) package
-to combine both file system into a union:
+to combine both filesystems into a union:
 
 ```js
 import {vol} from 'memfs';
