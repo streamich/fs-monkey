@@ -7,11 +7,12 @@ Monkey-patches for filesystem related things.
 **Terms**
 
 An *fs-like* object is an object that implements methods of Node's
-[filesystem API](https://nodejs.org/api/fs.html#fs_buffer_api).
+[filesystem API](https://nodejs.org/api/fs.html).
 It is denoted as `vol`:
 
 ```js
 let vol = {
+    readFile: () => { /* ... */ },
     readFileSync: () => { /* ... */ },
     // etc...
 }
@@ -24,12 +25,12 @@ let vol = {
  - [`patchRequire(vol[, Module])`](#patchrequirevol-module) - patches Node's `module` module to use a give *fs-like* object `vol` for module loading
 
 
-## `patchFs(vol[, fs])`
+# `patchFs(vol[, fs])`
 
 Rewrites Node's filesystem module `fs` with *fs-like* object.
 
  - `vol` - fs-like object
- - `fs` (optional) - a filesystem to patch, defaults to `require('fs')`
+ - `fs` *(optional)* - a filesystem to patch, defaults to `require('fs')`
 
 ```js
 import {patchFs} from 'fs-monkey';
@@ -55,12 +56,12 @@ console.log(require('fs').readdirSync('/')); // [ 'dir' ]
 ```
 
 
-## `patchRequire(vol[, Module])`
+# `patchRequire(vol[, Module])`
 
-Patches Node's `module` module to use a give *fs-like* object `vol` for module loading.
+Patches Node's `module` module to use a given *fs-like* object `vol` for module loading.
 
  - `vol` - fs-like object
- - `Module` (optional) - a module to patch, defaults to `require('module')`
+ - `Module` *(optional)* - a module to patch, defaults to `require('module')`
 
 Monkey-patches the `require` function in Node, this way you can make
 Node.js to *require* modules from your custom filesystem.

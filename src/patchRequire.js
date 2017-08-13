@@ -154,7 +154,7 @@ export default function patchRequire(vol, Module = require('module')) {
         }
     };
 
-    let warned = false;
+    let warned = true;
     Module._findPath = function(request, paths, isMain) {
         if (path.isAbsolute(request)) {
             paths = [''];
