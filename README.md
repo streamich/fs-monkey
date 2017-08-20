@@ -1,8 +1,9 @@
 # `fs-monkey`
 
-Monkey-patches for filesystem related things.
-
 [![][npm-img]][npm-url]
+
+Monkey-patches for filesystem related things. Rewrite `require` function,
+load Node's modules from memory. Or rewrite the whole `fs` filesystem module.
 
 **Terms**
 
@@ -19,10 +20,10 @@ let vol = {
 ```
 
 
-**API**
+`fs-monkey` **API**
 
  - [`patchFs(vol[, fs])`](#patchfsvol-fs) - rewrites Node's filesystem module `fs` with *fs-like* object `vol`
- - [`patchRequire(vol[, Module])`](#patchrequirevol-module) - patches Node's `module` module to use a give *fs-like* object `vol` for module loading
+ - [`patchRequire(vol[, Module])`](#patchrequirevol-module) - rewrites `require` function, patches Node's `module` module to use a give *fs-like* object `vol` for module loading
 
 
 # `patchFs(vol[, fs])`
@@ -70,11 +71,11 @@ It expects an object with three filesystem methods implemented that are
 needed for the `require` function to work.
 
 ```js
-patchRequire({
+let vol = {
     readFileSync: () => {},
     realpathSync: () => {},
     statSync: () => {},
-});
+};
 ```
 
 If you want to make Node.js to *require* your files from memory, you
