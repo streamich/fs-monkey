@@ -25,7 +25,6 @@
     "test-coverage": "nyc --per-file mocha --compilers js:babel-core/register --require source-map-support/register --full-trace --bail src/**/*.test.js"
   },
   "dependencies": {
-    "unixify" :"1.0.0"
   },
   "devDependencies": {
     "mocha": "3.4.2",

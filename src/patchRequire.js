@@ -1,7 +1,7 @@
 import * as path from 'path';
 
-const unixify = process.platform === 'win32' ? require('unixify') : (p)=>p;
-const correctPath = process.platform === 'win32' ? (path) => unixify( path.replace(/^\\\\\?\\.:\\/,'\\')) : (p)=>p;
+const correctPath = process.platform === 'win32' ? require('./correctPath') : (p)=>p;
+
 /**
  * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
  * because the buffer-to-string conversion in `fs.readFileSync()`
@@ -13,7 +13,6 @@ function stripBOM(content) {
     }
     return content;
 }
-
 
 /**
  * Rewrites `modules.js`, which is the factory for the `require` function.
