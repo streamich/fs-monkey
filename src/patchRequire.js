@@ -1,6 +1,7 @@
 import * as path from 'path';
 
-
+const unixify = process.platform === 'win32' ? require('unixify') : (p)=>p;
+const correctPath = process.platform === 'win32' ? (path) => unixify( path.replace(/^\\\\\?\\.:\\/,'\\')) : (p)=>p;
 /**
  * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
  * because the buffer-to-string conversion in `fs.readFileSync()`
@@ -33,6 +34,24 @@ function stripBOM(content) {
  * @param {Object} Module Module loader to patch.
  */
 export default function patchRequire(vol, Module = require('module')) {
+
+    // ensure all paths are corrected before use.
+    if( process.platform === 'win32') {
+        const original = vol;
+        vol = {
+            readFileSync: (path,options) => {
+                return original.readFileSync(correctPath( path ),options);
+            },
+        
+            realpathSync: (path) => {
+                return original.realpathSync(correctPath( path ));
+            },
+        
+            statSync: (path) => {
+                return original.statSync(correctPath( path ));
+            }
+        };
+    };
 
     // Used to speed up module loading.  Returns the contents of the file as
     // a string or undefined when the file cannot be opened.  The speedup
@@ -177,7 +196,7 @@ export default function patchRequire(vol, Module = require('module')) {
             // Don't search further if path doesn't exist
             const curPath = paths[i];
             if (curPath && stat(curPath) < 1) continue;
-            var basePath = path.resolve(curPath, request);
+            var basePath = correctPath( path.resolve(curPath, request) );
             var filename;
 
             var rc = stat(basePath);
