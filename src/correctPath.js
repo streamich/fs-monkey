@@ -47,7 +47,7 @@ function normalizePath(str, stripTrailing) {
  * Copyright (c) 2014, 2017, Jon Schlinkert.
  * Released under the MIT License.
  */
-function unixify(filepath, stripTrailing = true) {
+export function unixify(filepath, stripTrailing = true) {
   if(isWin) {
     filepath = normalizePath(filepath, stripTrailing);
     return filepath.replace(/^([a-zA-Z]+:|\.\/)/, '');
@@ -58,8 +58,6 @@ function unixify(filepath, stripTrailing = true) {
 /*
 * Corrects a windows path to unix format (including \\?\c:...)
 */
-function correctPath(filepath) {
+export function correctPath(filepath) {
     return unixify( filepath.replace(/^\\\\\?\\.:\\/,'\\'));
 }
-
-module.exports = correctPath;

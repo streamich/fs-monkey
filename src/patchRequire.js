@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-const correctPath = process.platform === 'win32' ? require('./correctPath') : (p)=>p;
+const correctPath = process.platform === 'win32' ? require('./correctPath').correctPath : (p)=>p;
 
 /**
  * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
