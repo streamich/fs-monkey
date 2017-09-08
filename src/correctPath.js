@@ -1,4 +1,5 @@
 const isWin = process.platform === 'win32';
+
 /*!
  * removeTrailingSeparator <https://github.com/darsain/remove-trailing-separator>
  *
@@ -7,7 +8,7 @@ const isWin = process.platform === 'win32';
  * Released under the ISC License.
  */
 function removeTrailingSeparator(str) {
-	var i = str.length - 1;
+	let i = str.length - 1;
 	if (i < 2) {
 		return str;
 	}
@@ -15,10 +16,10 @@ function removeTrailingSeparator(str) {
 		i--;
 	}
 	return str.substr(0, i + 1);
-};
+}
 
 function isSeparator(str, i) {
-    var char = str[i];
+    let char = str[i];
     return i > 0 && (char === '/' || (isWin && char === '\\'));
 }
 
@@ -38,7 +39,7 @@ function normalizePath(str, stripTrailing) {
     str = removeTrailingSeparator(str);
   }
   return str;
-};
+}
 
 /*!
  * unixify <https://github.com/jonschlinkert/unixify>
@@ -53,11 +54,11 @@ export function unixify(filepath, stripTrailing = true) {
     return filepath.replace(/^([a-zA-Z]+:|\.\/)/, '');
   }
   return filepath;
-};
+}
 
 /*
 * Corrects a windows path to unix format (including \\?\c:...)
 */
 export function correctPath(filepath) {
-    return unixify( filepath.replace(/^\\\\\?\\.:\\/,'\\'));
+    return unixify(filepath.replace(/^\\\\\?\\.:\\/,'\\'));
 }

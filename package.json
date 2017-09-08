@@ -1,6 +1,6 @@
 {
   "name": "fs-monkey",
-  "version": "0.1.5",
+  "version": "0.2.1",
   "description": "Monkey patches for file system related things.",
   "main": "lib/index.js",
   "keywords": [

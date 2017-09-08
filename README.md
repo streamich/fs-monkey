@@ -57,11 +57,12 @@ console.log(require('fs').readdirSync('/')); // [ 'dir' ]
 ```
 
 
-# `patchRequire(vol[, Module])`
+# `patchRequire(vol[, unixifyPaths[, Module]])`
 
 Patches Node's `module` module to use a given *fs-like* object `vol` for module loading.
 
  - `vol` - fs-like object
+ - `unixifyPaths` *(optional)* - whether to convert Windows paths to unix style paths, defaults to `false`.
  - `Module` *(optional)* - a module to patch, defaults to `require('module')`
 
 Monkey-patches the `require` function in Node, this way you can make
