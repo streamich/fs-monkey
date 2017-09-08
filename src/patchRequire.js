@@ -1,6 +1,7 @@
 import * as path from 'path';
 
-const correctPath = process.platform === 'win32' ? require('./correctPath').correctPath : p => p;
+const isWin32 = process.platform === 'win32';
+const correctPath = isWin32 ? require('./correctPath').correctPath : p => p;
 
 /**
  * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -35,7 +36,7 @@ function stripBOM(content) {
 export default function patchRequire(vol, unixifyPaths = false, Module = require('module')) {
 
     // ensure all paths are corrected before use.
-    if(process.platform === 'win32' && unixifyPaths) {
+    if(isWin32 && unixifyPaths) {
         const original = vol;
         vol = {
             readFileSync: (path,options) => {
