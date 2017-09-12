@@ -62,3 +62,20 @@ export function unixify(filepath, stripTrailing = true) {
 export function correctPath(filepath) {
     return unixify(filepath.replace(/^\\\\\?\\.:\\/,'\\'));
 }
+
+export function isWindowsPath(filepath) {
+  if (filepath && filepath.length >= 3) {
+    
+    // UNC-style path (\\...) -- assume it is a windows-style path
+    if (filepath.charCodeAt(0) === 92 && filepath.charCodeAt(1) === 92) {
+      return true;
+    }
+    
+    // is it '[driveletter]:\'
+    if( filepath.charCodeAt(1) == 58 && filepath.charCodeAt(2) === 92 ) {  
+      var code = filepath.charCodeAt(0); 
+      return ((code >= 65/*A*/ && code <= 90/*Z*/) || (code >= 97/*a*/ && code <= 122/*z*/))
+    }
+  }
+  return false;
+}

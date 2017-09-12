@@ -2,6 +2,7 @@ import * as path from 'path';
 
 const isWin32 = process.platform === 'win32';
 const correctPath = isWin32 ? require('./correctPath').correctPath : p => p;
+const isWindowsPath = isWin32 ? require('./correctPath').isWindowsPath : p => p;
 
 /**
  * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -196,10 +197,21 @@ export default function patchRequire(vol, unixifyPaths = false, Module = require
             // Don't search further if path doesn't exist
             const curPath = paths[i];
             if (curPath && stat(curPath) < 1) continue;
-            var basePath = correctPath( path.resolve(curPath, request) );
-            var filename;
-
+            var basePath = path.resolve(curPath, request);
             var rc = stat(basePath);
+
+            // check if this is a windows paths and if it should be corrected
+            if( rc < 0 && isWindowsPath(basePath) ) {
+                // uncorrected path doesn't work, maybe the correctedPath?
+                var correctedPath = correctPath(basePath);
+                rc = stat( correctedPath );
+                if( rc >= 0 ) {
+                    // that looks pretty good, let's go with that.
+                    basePath = correctedPath; 
+                }                
+            }
+            
+            var filename;
             if (!trailingSlash) {
                 if (rc === 0) {  // File.
                     if (preserveSymlinks && !isMain) {
