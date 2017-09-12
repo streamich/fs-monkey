@@ -2,7 +2,7 @@ import * as path from 'path';
 
 const isWin32 = process.platform === 'win32';
 const correctPath = isWin32 ? require('./correctPath').correctPath : p => p;
-const isWindowsPath = isWin32 ? require('./correctPath').isWindowsPath : p => p;
+const isWindowsPath = isWin32 ? require('./correctPath').isWindowsPath : p => false;
 
 /**
  * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
