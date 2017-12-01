@@ -2,41 +2,55 @@ import {fsProps, fsAsyncMethods, fsSyncMethods} from './util/lists';
 
 
 export default function patchFs(vol, fs = require('fs')) {
+    const bkp = {};
+
+    const patch = (key, newValue) => {
+        bkp[key] = fs[key];
+        fs[key] = newValue;
+    };
+
+    const patchMethod = key => patch(key, vol[key].bind(vol));
 
     // General properties
     for(let prop of fsProps)
         if(typeof vol[prop] !== 'undefined')
-            fs[prop] = vol[prop];
+            patch(prop, vol[prop]);
 
 
     // Bind the first argument of some constructors, this is relevant for `memfs`.
     // TODO: Maybe in the future extend this function such that it internally creates
     // TODO: the below four constructor functions.
     if(typeof vol.StatWatcher === 'function') {
-        fs.StatWatcher = vol.StatWatcher.bind(null, vol);
+        patch('StatWatcher', vol.FSWatcher.bind(null, vol));
     }
     if(typeof vol.FSWatcher === 'function') {
-        fs.FSWatcher = vol.FSWatcher.bind(null, vol);
+        patch('FSWatcher', vol.StatWatcher.bind(null, vol));
     }
     if(typeof vol.ReadStream === 'function') {
-        fs.ReadStream = vol.ReadStream.bind(null, vol);
+        patch('ReadStream', vol.ReadStream.bind(null, vol));
     }
     if(typeof vol.WriteStream === 'function') {
-        fs.WriteStream = vol.WriteStream.bind(null, vol);
+        patch('WriteStream', vol.WriteStream.bind(null, vol));
     }
 
 
     // Extra hidden function
     if(typeof vol._toUnixTimestamp === 'function')
-        fs._toUnixTimestamp = vol._toUnixTimestamp.bind(vol);
+        patchMethod('_toUnixTimestamp');
 
 
     // Main API
     for(let method of fsAsyncMethods)
         if(typeof vol[method] === 'function')
-            fs[method] = vol[method].bind(vol);
+            patchMethod(method);
 
     for(let method of fsSyncMethods)
         if(typeof vol[method] === 'function')
-            fs[method] = vol[method].bind(vol);
+            patchMethod(method);
+
+    // Give user back a method to revert the changes.
+    return function unpatch () {
+        console.log(bkp);
+        for (const key in bkp) fs[key] = bkp[key];
+    };
 };
