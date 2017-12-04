@@ -50,7 +50,6 @@ export default function patchFs(vol, fs = require('fs')) {
 
     // Give user back a method to revert the changes.
     return function unpatch () {
-        console.log(bkp);
         for (const key in bkp) fs[key] = bkp[key];
     };
 };
