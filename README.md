@@ -31,7 +31,7 @@ let vol = {
 # Reference
 
  - [`patchFs`](./docs/api/patchFs.md) - rewrites Node's filesystem module `fs` with *fs-like* object `vol`
- - [`patchRequire`](./docs/api/patchRequire.md) - rewrites `require` function, patches Node's `module` module to use the give *fs-like* object `vol` for module loading
+ - [`patchRequire`](./docs/api/patchRequire.md) - rewrites `require` function, patches Node's `module` module to use a given *fs-like* object for module loading
 
 
 [npm-img]: https://img.shields.io/npm/v/fs-monkey.svg
