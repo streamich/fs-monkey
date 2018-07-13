@@ -24,7 +24,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "jest": "23.4.0",
+    "jest": "23.4.1",
     "babel-jest": "23.4.0",
     "babel-core": "6.26.3",
     "babel-cli": "6.26.0",
