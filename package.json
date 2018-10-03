@@ -31,7 +31,7 @@
     "babel-preset-es2015": "6.24.1",
     "source-map-support": "0.5.9",
     "semantic-release": "15.9.16",
-    "@types/jest": "23.3.2",
+    "@types/jest": "23.3.3",
     "@types/node": "8.10.32"
   },
   "jest": {
