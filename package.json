@@ -32,7 +32,7 @@
     "source-map-support": "0.5.9",
     "semantic-release": "15.9.17",
     "@types/jest": "23.3.4",
-    "@types/node": "8.10.34"
+    "@types/node": "8.10.35"
   },
   "jest": {
     "collectCoverageFrom": [
