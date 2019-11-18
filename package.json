@@ -30,7 +30,7 @@
     "babel-cli": "6.26.0",
     "babel-preset-es2015": "6.24.1",
     "source-map-support": "0.5.16",
-    "semantic-release": "15.13.30",
+    "semantic-release": "15.13.31",
     "@types/jest": "23.3.14",
     "@types/node": "8.10.59"
   },
