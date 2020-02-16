@@ -1,6 +1,6 @@
-import {vol} from '../../../memfs/lib';
-import patchRequire from '../patchRequire';
-const {ufs} = require('../../../unionfs/lib');
+import {vol} from 'memfs';
+import {patchRequire} from 'fs-monkey';
+import {ufs} from 'unionfs';
 import * as fs from 'fs';
 
 
