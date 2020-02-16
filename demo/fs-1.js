@@ -1,5 +1,5 @@
-import {vol} from '../../../memfs/lib';
-import {patchFs} from '../index';
+import {vol} from 'memfs';
+import {patchFs} from 'fs-monkey';
 
 vol.fromJSON({'/dir/foo': 'bar'});
 patchFs(vol);

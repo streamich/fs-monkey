@@ -1,4 +1,4 @@
-import {patchFs} from '../index';
+import {patchFs} from 'fs-monkey';
 
 const myfs = {
     readFileSync: () => 'hello world',
