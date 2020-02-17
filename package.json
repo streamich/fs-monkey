@@ -28,7 +28,7 @@
   "scripts": {
     "build": "babel src --out-dir lib",
     "test": "jest",
-    "semantic-release": "semantic-release"
+    "semantic-release": "npm run build && semantic-release"
   },
   "dependencies": {},
   "devDependencies": {
