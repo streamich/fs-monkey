@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/streamich/fs-monkey/compare/v1.0.0...v1.0.1) (2020-05-14)
+
+
+### Bug Fixes
+
+* release broken import ([70080c5](https://github.com/streamich/fs-monkey/commit/70080c5fbb1e4ac82497016c4e06218cdedacd72))
+
 # [1.0.0](https://github.com/streamich/fs-monkey/compare/v0.3.1...v1.0.0) (2020-02-17)
 
 
