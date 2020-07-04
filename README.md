@@ -7,13 +7,13 @@ Monkey-patches for filesystem related things.
   - Rewrite `require` function to load Node's modules from memory.
   - Or rewrite the whole `fs` filesystem module.
 
-### Install
+## Install
 
 ```shell
 npm install --save fs-monkey
 ```
 
-# Terms
+## Terms
 
 An *fs-like* object is an object that implements methods of Node's
 [filesystem API](https://nodejs.org/api/fs.html).
@@ -28,7 +28,7 @@ let vol = {
 ```
 
 
-# Reference
+## Reference
 
  - [`patchFs`](./docs/api/patchFs.md) - rewrites Node's filesystem module `fs` with *fs-like* object `vol`
  - [`patchRequire`](./docs/api/patchRequire.md) - rewrites `require` function, patches Node's `module` module to use a given *fs-like* object for module loading
@@ -40,6 +40,6 @@ let vol = {
 [travis-badge]: https://travis-ci.org/streamich/fs-monkey.svg?branch=master
 
 
-# License
+## License
 
 [Unlicense](./LICENSE) - public domain.
