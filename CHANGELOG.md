@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/streamich/fs-monkey/compare/v1.0.2...v1.0.3) (2021-04-05)
+
+
+### Bug Fixes
+
+* add missing parameter in jsdoc for `patchRequire` ([#233](https://github.com/streamich/fs-monkey/issues/233)) ([28a5d9b](https://github.com/streamich/fs-monkey/commit/28a5d9b46fbdfec42c6d841aec31874ea9ea9ca4))
+
 ## [1.0.1](https://github.com/streamich/fs-monkey/compare/v1.0.0...v1.0.1) (2020-05-14)
 
 
