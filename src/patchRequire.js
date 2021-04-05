@@ -31,6 +31,7 @@ function stripBOM(content) {
  * The methods should behave like the ones on the native `fs` object.
  *
  * @param {Object} vol
+ * @param {boolean} [unixifyPaths=false]
  * @param {Object} Module Module loader to patch.
  */
 export default function patchRequire(vol, unixifyPaths = false, Module = require('module')) {
@@ -42,11 +43,11 @@ export default function patchRequire(vol, unixifyPaths = false, Module = require
             readFileSync: (path,options) => {
                 return original.readFileSync(correctPath(path),options);
             },
-        
+
             realpathSync: (path) => {
                 return original.realpathSync(correctPath(path));
             },
-        
+
             statSync: (path) => {
                 return original.statSync(correctPath(path));
             }
