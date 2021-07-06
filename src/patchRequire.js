@@ -35,6 +35,11 @@ function stripBOM(content) {
  * @param {Object} Module Module loader to patch.
  */
 export default function patchRequire(vol, unixifyPaths = false, Module = require('module')) {
+    const backup = {
+        _extensions: Object.assign({}, Module._extensions),
+        _findPath: Module._findPath,
+        _pathCache: Object.assign({}, Module._pathCache),
+    };
 
     // ensure all paths are corrected before use.
     if(isWin32 && unixifyPaths) {
@@ -254,4 +259,12 @@ export default function patchRequire(vol, unixifyPaths = false, Module = require
         }
         return false;
     };
+
+    const unpatch = () => {
+        for (const method in backup) {
+            Module[method] = backup[method];
+        }
+    };
+
+    return unpatch;
 }
