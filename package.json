@@ -37,7 +37,7 @@
     "@babel/preset-env": "7.16.0",
     "@semantic-release/changelog": "6.0.0",
     "@semantic-release/git": "10.0.0",
-    "@semantic-release/npm": "8.0.0",
+    "@semantic-release/npm": "8.0.2",
     "@types/jest": "27.0.2",
     "@types/node": "8.10.66",
     "babel-jest": "27.2.5",
