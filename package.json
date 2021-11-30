@@ -40,8 +40,8 @@
     "@semantic-release/npm": "8.0.3",
     "@types/jest": "27.0.3",
     "@types/node": "8.10.66",
-    "babel-jest": "27.4.0",
-    "jest": "27.4.0",
+    "babel-jest": "27.4.1",
+    "jest": "27.4.1",
     "semantic-release": "18.0.1",
     "source-map-support": "0.5.21"
   },
