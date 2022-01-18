@@ -37,12 +37,12 @@
     "@babel/preset-env": "7.16.8",
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/npm": "8.0.3",
+    "@semantic-release/npm": "9.0.0",
     "@types/jest": "27.4.0",
     "@types/node": "8.10.66",
     "babel-jest": "27.4.6",
     "jest": "27.4.7",
-    "semantic-release": "18.0.1",
+    "semantic-release": "19.0.2",
     "source-map-support": "0.5.21"
   },
   "release": {
