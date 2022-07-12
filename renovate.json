@@ -1,14 +1,10 @@
 {
-  "extends": [
-    "config:base"
-  ],
-  "automerge": true,
-  "pinVersions": false,
-  "major": {
-    "automerge": false
-  },
-  "devDependencies": {
+  "extends": ["config:base"],
+  "lockFileMaintenance": {
+    "enabled": true,
     "automerge": true,
-    "pinVersions": true
-  }
+    "schedule": ["before 3am on the first day of the month"]
+  },
+  "rangeStrategy": "replace",
+  "postUpdateOptions": ["yarnDedupeHighest"]
 }
