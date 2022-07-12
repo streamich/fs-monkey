@@ -45,6 +45,7 @@ export const fsSyncMethods = [
     'fdatasyncSync',
     'mkdtempSync',
     'copyFileSync',
+    'rmSync',
 
     'createReadStream',
     'createWriteStream',
@@ -87,6 +88,7 @@ export const fsAsyncMethods = [
     'fdatasync',
     'mkdtemp',
     'copyFile',
+    'rm',
 
     'watchFile',
     'unwatchFile',
