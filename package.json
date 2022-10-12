@@ -39,7 +39,7 @@
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^9.0.1",
     "@types/jest": "^28.1.4",
-    "@types/node": "^8.10.66",
+    "@types/node": "^16.0.0",
     "babel-jest": "^28.1.2",
     "jest": "^28.1.2",
     "semantic-release": "^19.0.3",
