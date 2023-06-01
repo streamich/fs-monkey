@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/streamich/fs-monkey/compare/v1.0.3...v1.0.4) (2023-06-01)
+
+
+### Bug Fixes
+
+* add .rm and .rmSync to fs methods ([#362](https://github.com/streamich/fs-monkey/issues/362)) ([2f1a49f](https://github.com/streamich/fs-monkey/commit/2f1a49f7679ac14374088086f3740e76b03caf73))
+
 ## [1.0.3](https://github.com/streamich/fs-monkey/compare/v1.0.2...v1.0.3) (2021-04-05)
 
 
