@@ -113,7 +113,8 @@ export default function patchRequire(vol, unixifyPaths = false, Module = require
 
         let pkg;
         try {
-            pkg = packageMainCache[requestPath] = JSON.parse(json).main;
+            const pkgJson = JSON.parse(json);
+            pkg = packageMainCache[requestPath] = pkgJson.exports && pkgJson.exports.require || pkgJson.main;
         } catch (e) {
             e.path = jsonPath;
             e.message = 'Error parsing ' + jsonPath + ': ' + e.message;
