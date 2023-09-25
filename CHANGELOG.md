@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/streamich/fs-monkey/compare/v1.0.4...v1.0.5) (2023-09-25)
+
+
+### Bug Fixes
+
+* look for `exports.require` in `package.json` in addition to `main` when patching `require` ([#378](https://github.com/streamich/fs-monkey/issues/378)) ([411b791](https://github.com/streamich/fs-monkey/commit/411b7910fed8951b0fa5bab4daa945470ce26077))
+
 ## [1.0.4](https://github.com/streamich/fs-monkey/compare/v1.0.3...v1.0.4) (2023-06-01)
 
 
