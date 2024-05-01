@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/streamich/fs-monkey/compare/v1.0.5...v1.0.6) (2024-05-01)
+
+
+### Bug Fixes
+
+* remove unessessary executable bits ([#386](https://github.com/streamich/fs-monkey/issues/386)) ([d42501a](https://github.com/streamich/fs-monkey/commit/d42501a05d3d9510547c35d33d2a8886fd034ee7))
+
 ## [1.0.5](https://github.com/streamich/fs-monkey/compare/v1.0.4...v1.0.5) (2023-09-25)
 
 
