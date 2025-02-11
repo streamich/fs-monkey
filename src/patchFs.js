@@ -48,8 +48,24 @@ export default function patchFs(vol, fs = require('fs')) {
         if(typeof vol[method] === 'function')
             patchMethod(method);
 
+    // Promises API
+    let promisesBackup;
+    try {
+        promisesBackup = fs.promises;
+        Object.defineProperty(fs, 'promises', {
+            get: () => vol.promises
+        });
+    } catch {
+        undefined;
+    }
+
     // Give user back a method to revert the changes.
     return function unpatch () {
         for (const key in bkp) fs[key] = bkp[key];
+        if (promisesBackup) {
+            Object.defineProperty(fs, 'promises', {
+                get: () => promisesBackup
+            });
+        }
     };
 };
