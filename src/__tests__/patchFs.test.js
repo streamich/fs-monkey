@@ -20,6 +20,29 @@ describe('patchFs', () => {
         expect(fs.F_OK).toBe(vol.F_OK);
     });
 
+    it('should patch promises', () => {
+        const vol = {
+            get promises() {
+                return {
+                    readFile: () => 'foo'
+                }
+            }
+        };
+        const fs = {
+            get promises() {
+                return {
+                    readFile: () => 'bar'
+                }
+            }
+        };
+
+        const unpatch = patchFs(vol, fs);
+        expect(fs.promises.readFile()).toBe('foo');
+        
+        unpatch();
+        expect(fs.promises.readFile()).toBe('bar');
+    })
+
     describe('unpatch()', () => {
         it('should return "unpatch" method', () => {
             const vol = {
