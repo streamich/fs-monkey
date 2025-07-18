@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/streamich/fs-monkey/compare/v1.0.6...v1.1.0) (2025-07-18)
+
+
+### Features
+
+* support promises in patchFs ([#217](https://github.com/streamich/fs-monkey/issues/217)) ([182ea8b](https://github.com/streamich/fs-monkey/commit/182ea8b44fce1ba1fdb1e5c0ea1cd26bb950b117))
+
 ## [1.0.6](https://github.com/streamich/fs-monkey/compare/v1.0.5...v1.0.6) (2024-05-01)
 
 
