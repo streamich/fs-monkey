@@ -27,7 +27,7 @@
     "url": "https://github.com/streamich/fs-monkey.git"
   },
   "scripts": {
-    "build": "babel src --out-dir lib",
+    "build": "babel src --out-dir lib --copy-files",
     "test": "jest"
   },
   "dependencies": {},
