@@ -20,6 +20,16 @@ describe('patchFs', () => {
         expect(fs.F_OK).toBe(vol.F_OK);
     });
 
+    it('should not remove promises', () => {
+        const vol = {};
+        const fs = {
+            promises: { FOO: 'BAR' }
+        };
+
+        patchFs(vol, fs);
+        expect(fs.promises.FOO).toBe('BAR');
+    });
+
     it('should patch promises', () => {
         const vol = {
             get promises() {

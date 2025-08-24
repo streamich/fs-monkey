@@ -52,8 +52,9 @@ export default function patchFs(vol, fs = require('fs')) {
     let promisesBackup;
     try {
         promisesBackup = fs.promises;
+        const patchedPromises = Object.assign({}, fs.promises, vol.promises);
         Object.defineProperty(fs, 'promises', {
-            get: () => vol.promises
+            get: () => patchedPromises,
         });
     } catch {
         undefined;
